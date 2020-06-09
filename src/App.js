@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrease } from './redux/actions/counterAction'
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+
+  const counter = useSelector(state => state.counterReducer.counter);
+  const data = useSelector(state => state.counterReducer.data);
+  const isLoading = useSelector(state => state.loadingReducer.isLoading);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Counter : { counter }</h1>
+      <h2>Loading Status : { isLoading ? 'ローディング' : '______' } </h2>
+      <h2>Data : { data }</h2>
+      <button onClick={ () => dispatch({type: 'INCREASE', payload: counter }) }>+</button>
+      <button onClick={ () => dispatch(decrease('マイナス')) }>-</button>
     </div>
   );
 }
