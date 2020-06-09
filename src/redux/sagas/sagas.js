@@ -20,7 +20,7 @@ function* increaseAsync(payload) {
         //console.log(data)
         yield put({type: 'INCREASE_ASYNC', payload: JSON.stringify(data) });
     } catch (error) {
-
+        //エラーの場合
     }
     yield put({type: 'NOT_LOADING'});
 }
